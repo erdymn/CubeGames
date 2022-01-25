@@ -1,0 +1,84 @@
+﻿@model CubeGamesCase_Model.ViewModels.ProductViewModel
+@{
+    var title = "Create Product";
+}
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Product.ProductId" />
+        @if (Model.Product != null)
+        {
+            title = "Edit Product";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Product.ProductName"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Product.ProductName" class="form-control" />
+                    <span asp-validation-for="Product.ProductName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Product.ProductColor"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Product.ProductColor" class="form-control" />
+                    <span asp-validation-for="Product.ProductColor" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Product.ProductPrice"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Product.ProductPrice" class="form-control" />
+                    <span asp-validation-for="Product.ProductPrice" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Product.ProductStock"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Product.ProductStock" class="form-control" />
+                    <span asp-validation-for="Product.ProductStock" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Product.CategoryId"></label>
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(x => x.Product.CategoryId, Model.CategoryList, "Category List", new { @class = "form-control" })
+                    <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 offset-4">
+                    @if (Model.Product == null)
+                    {
+                        <button type="submit" class="btn btn-primary form-control">Create</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-primary form-control">Update</button>
+                    }
+
+                </div>
+                <div class="col-4">
+                    <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{ 
+<partial name="_ValidationScriptsPartial" />
+}
